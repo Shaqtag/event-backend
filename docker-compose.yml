@@ -3,8 +3,8 @@ services:
     container_name: ms_pg_sql
     image: postgres
     environment:
-      POSTGRES_USER: shaquille
-      POSTGRES_PASSWORD: shaquille
+      POSTGRES_USER: pg_admin_7k9m
+      POSTGRES_PASSWORD: PG#9xK2$mN8vQ7wE@5tR
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -18,8 +18,8 @@ services:
     container_name: ms_pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_DEFAULT_EMAIL: admin.pgadmin@company.local
+      PGADMIN_DEFAULT_PASSWORD: PgA#8mX9$nV3cL7@wQ2k
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin:/var/lib/pgadmin
@@ -37,16 +37,17 @@ services:
     networks:
       - microservices-net
 
-  mongodb:
+  mongo:
     image: mongo
     container_name: mongo_db
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongo:/data
+    restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=shaquille
-      - MONGO_INITDB_ROOT_PASSWORD=shaquille
+      MONGO_INITDB_ROOT_USERNAME: shaquille
+      MONGO_INITDB_ROOT_PASSWORD: shaquille
 
   mongo-express:
     image: mongo-express
@@ -55,9 +56,10 @@ services:
     ports:
       - 8081:8081
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=shaquille
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=shaquille
-      - ME_CONFIG_MONGODB_SERVER=mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: shaquille
+      ME_CONFIG_MONGODB_ADMINPASSWORD: shaquille
+      ME_CONFIG_MONGODB_URL: mongodb://mongo_root_4h8j:MG%236yH4%24pL9sF2%40vB3n@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -70,6 +72,7 @@ services:
       - "22181:2181"
     networks:
       - microservices-net
+
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: ms_kafka
@@ -91,8 +94,10 @@ services:
     container_name: ms-mail-dev
     image: maildev/maildev
     ports:
-      - 1080:1080
-      - 1025:1025
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - microservices-net
 
 networks:
   microservices-net:
