@@ -23,7 +23,7 @@ public class PrestataireController {
     // Convertir une entité en DTO
     private PrestataireDTO toDTO(Prestataire prestataire) {
         return new PrestataireDTO(
-                prestataire.getId(),
+                prestataire.getPrestataireId(),
                 prestataire.getNom(),
                 prestataire.getLocalisation(),
                 prestataire.getContact()

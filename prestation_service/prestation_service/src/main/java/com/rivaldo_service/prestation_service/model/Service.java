@@ -14,7 +14,7 @@ public class Service {
     public static final String SEQUENCE_NAME = "services_sequence";
 
     @Id
-    private Long id;
+    private Long serviceId;
 
     @NotBlank(message = "Le nom du service ne peut pas être vide")
     private String nomService;
@@ -26,7 +26,7 @@ public class Service {
     public Service() {}
 
     public Service(Long id, String nomService, String description) {
-        this.id = id;
+        this.serviceId = id;
         this.nomService = nomService;
         this.description = description;
     }

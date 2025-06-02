@@ -52,7 +52,7 @@ public class ReservationService {
     public Reservation updateReservation(Long id, Reservation reservation) {
         Reservation existingReservation = reservationRepository.findById(id).orElse(null);
         if (existingReservation != null) {
-            existingReservation.setClientId(reservation.getClientId());
+            existingReservation.setUserId(reservation.getUserId());
             existingReservation.setPrestataireId(reservation.getPrestataireId());
             existingReservation.setDateDebut(reservation.getDateDebut());
             existingReservation.setDateFin(reservation.getDateFin());

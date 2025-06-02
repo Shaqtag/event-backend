@@ -23,7 +23,7 @@ public class ServiceController {
 
     @PostMapping
     public ResponseEntity<Service> createService(@Valid @RequestBody Service service) {
-        service.setId(sequenceGeneratorService.generateSequence(Service.SEQUENCE_NAME));
+        service.setServiceId(sequenceGeneratorService.generateSequence(Service.SEQUENCE_NAME));
         Service saved = serviceRepository.save(service);
         return ResponseEntity.ok(saved);
     }

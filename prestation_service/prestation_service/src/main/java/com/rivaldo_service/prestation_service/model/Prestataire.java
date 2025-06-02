@@ -15,7 +15,7 @@ public class Prestataire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long prestataireId;
 
     @NotBlank(message = "Le nom ne peut pas être vide")
     private String nom;

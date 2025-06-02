@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long reservationId;
 
-    private Long clientId;       // ID du client (lié au microservice Client)
+    private Long userId;       // ID du client (lié au microservice Client)
     private Long prestataireId;     // ID du prestataire (lié au microservice Prestataire)
     private LocalDateTime dateDebut;
     private LocalDateTime dateFin;
