@@ -25,7 +25,7 @@ public class ReservationController {
 
     @GetMapping("/client/{clientId}")
     public ResponseEntity<List<Reservation>> getReservationsClient(@PathVariable Long userId) {
-        return ResponseEntity.ok(reservationService.getReservationsParClient(userId));
+        return ResponseEntity.ok(reservationService.getReservationsParUser(userId));
     }
 
     @GetMapping("/materiel/{materielId}")

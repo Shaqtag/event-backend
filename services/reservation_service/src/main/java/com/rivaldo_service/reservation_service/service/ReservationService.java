@@ -20,8 +20,8 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public List<Reservation> getReservationsParClient(Long clientId) {
-        return reservationRepository.findByClientId(clientId);
+    public List<Reservation> getReservationsParUser(Long userId) {
+        return reservationRepository.findByUserId(userId);
     }
 
     public List<Reservation> getReservationsParPrestataire(Long prestataireId) {
