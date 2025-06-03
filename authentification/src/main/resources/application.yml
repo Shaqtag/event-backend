@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: authentification
+  config:
+    import: optional:configserver:http://localhost:8899
