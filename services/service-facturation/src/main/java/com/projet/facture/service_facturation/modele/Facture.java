@@ -1,97 +1,94 @@
-package com.projet.service_facturation.modele;
+package com.projet.facture.service_facturation.modele;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 // Entité représentant une facture dans la base de données
 @Entity
-@Table(name = "invoices")
-public class Invoice {
+@Table(name = "factures")
+public class Facture {
 
-    // Identifiant unique de la facture, généré automatiquement
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long identifiant;
 
-    // Identifiant du client (non null)
     @Column(nullable = false)
-    private String clientId;
+    private String identifiantClient;
 
-    // Montant total de la facture (non null)
     @Column(nullable = false)
-    private Double amount;
+    private Double montant;
 
-    // Statut de la facture (PENDING, PAID, CANCELED)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private InvoiceStatus status;
+    private StatutFacture statut;
 
-    // Date de création de la facture
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime dateCreation;
 
-    // Liste des identifiants des prestations réservées, stockée en JSONB
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private List<String> serviceIds;
+    private MyJsonClass jsonData;
 
-    // Constructeur par défaut, initialise la date et le statut
-    public Invoice() {
-        this.createdAt = LocalDateTime.now();
-        this.status = InvoiceStatus.PENDING;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "jsonb")
+    private List<String> identifiantsPrestations;
+
+    public Facture() {
+        this.dateCreation = LocalDateTime.now();
+        this.statut = StatutFacture.EN_ATTENTE;
     }
 
     // Getters et Setters
-    public Long getId() {
-        return id;
+    public Long getIdentifiant() {
+        return identifiant;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdentifiant(Long identifiant) {
+        this.identifiant = identifiant;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getIdentifiantClient() {
+        return identifiantClient;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setIdentifiantClient(String identifiantClient) {
+        this.identifiantClient = identifiantClient;
     }
 
-    public Double getAmount() {
-        return amount;
+    public Double getMontant() {
+        return montant;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setMontant(Double montant) {
+        this.montant = montant;
     }
 
-    public InvoiceStatus getStatus() {
-        return status;
+    public StatutFacture getStatut() {
+        return statut;
     }
 
-    public void setStatus(InvoiceStatus status) {
-        this.status = status;
+    public void setStatut(StatutFacture statut) {
+        this.statut = statut;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getDateCreation() {
+        return dateCreation;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setDateCreation(LocalDateTime dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public List<String> getServiceIds() {
-        return serviceIds;
+    public List<String> getIdentifiantsPrestations() {
+        return identifiantsPrestations;
     }
 
-    public void setServiceIds(List<String> serviceIds) {
-        this.serviceIds = serviceIds;
+    public void setIdentifiantsPrestations(List<String> identifiantsPrestations) {
+        this.identifiantsPrestations = identifiantsPrestations;
     }
-}
-
-// Enumération pour les statuts possibles de la facture
-enum InvoiceStatus {
-    PENDING, PAID, CANCELED
 }
